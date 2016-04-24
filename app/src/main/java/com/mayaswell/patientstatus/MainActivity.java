@@ -188,9 +188,9 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		currentSearchParametersIndex--;
-		if (currentSearchParametersIndex >= 0 && searches.size() > 0) {
+		if (currentSearchParametersIndex >= 0 && searches.size() > 1) {
 			if (currentSearchParametersIndex >= searches.size()) {
-				currentSearchParametersIndex = searches.size() - 1;
+				currentSearchParametersIndex = searches.size() - 2;
 			}
 			final SearchParameters sp = searches.get(currentSearchParametersIndex);
 			if (sp != null) {

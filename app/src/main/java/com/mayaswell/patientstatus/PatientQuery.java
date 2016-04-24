@@ -15,6 +15,8 @@ import java.util.Iterator;
  * I've wrapped what I hope are the most dirty assumptions into this wrapper class. As a first draft I've
  * downloaded all the preset data into a HashMap cache.
  *
+ * Data is returned to the querier via a listener, which also provides notifications for the ready state.
+ *
  * Initial assumptions
  *  - patient data can reasonably fit in memory (realistically it's probably in a searchable database)
  *  - not likely to change over the lifespan of the app (so only needs to be grabbed once)
