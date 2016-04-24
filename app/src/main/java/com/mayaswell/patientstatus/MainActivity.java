@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -25,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
 	private ListView patientView;
 	private PatientAdapter patientAdapter;
 	Patient selectedPatient;
+	ArrayList<SearchParameters> searches;
+	int currentSearchParametersIndex = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		selectedPatient = null;
+		searches = new ArrayList<SearchParameters>();
 
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -124,6 +128,17 @@ public class MainActivity extends AppCompatActivity {
 				final String sname = (snameEdit != null) ? snameEdit.getText().toString() : "";
 				final String status = (statusEdit != null) ? statusEdit.getText().toString() : "";
 				searchPatient(fname, sname, status);
+				SearchParameters sp = new SearchParameters(fname, sname, status);
+				if (currentSearchParametersIndex < 0) {
+					currentSearchParametersIndex = 0;
+				}
+				if (currentSearchParametersIndex >= searches.size()) {
+					searches.add(sp);
+					currentSearchParametersIndex = searches.size();
+				} else {
+					searches.set(currentSearchParametersIndex, sp);
+				}
+				currentSearchParametersIndex++;
 				dialog.dismiss();
 			}
 		});
@@ -168,5 +183,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
 }
