@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 	Patient selectedPatient;
 	ArrayList<SearchParameters> searches;
 	int currentSearchParametersIndex = 0;
+
+	private static final int TIME_DELAY = 2000;
+	private static long back_pressed = System.currentTimeMillis();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +191,14 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public void onBackPressed() {
+		if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+			super.onBackPressed();
+		} else {
+			Toast.makeText(getBaseContext(), "Press once again to exit!",
+					Toast.LENGTH_SHORT).show();
+		}
+		back_pressed = System.currentTimeMillis();
+
 		currentSearchParametersIndex--;
 		if (currentSearchParametersIndex >= 0 && searches.size() > 1) {
 			if (currentSearchParametersIndex >= searches.size()) {
