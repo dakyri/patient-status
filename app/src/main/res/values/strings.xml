@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PatientStatus</string>
+    <string name="action_settings">Settings</string>
+    <string name="patient_url_base">https://demo3417391.mockable.io/patients</string>
+    <string name="status_url_base">https://demo3417391.mockable.io/patient_status</string>
+    <string name="firstname_label">First Name</string>
+    <string name="surname_label">Surname</string>
+    <string name="status_label">Status</string>
+</resources>

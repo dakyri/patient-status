@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/patient_item_bg"
+>
+	<TextView
+		android:id="@+id/itemNameView"
+		android:maxLines="200"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dip"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:singleLine="true"
+		style="@style/ItemNameText"
+		android:text="Wade Wilson"
+	/>
+
+	<TextView
+		android:id="@+id/itemStatusView"
+		android:width="0dip"
+		android:singleLine="true"
+		android:maxLines="200"
+		android:layout_width="0dip"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/itemNameView"
+		android:layout_toRightOf="@id/itemNameView"
+		android:layout_alignParentRight="true"
+		android:layout_marginTop="5dip"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		style="@style/ItemStatusText"
+		android:text="great"
+	/>
+</RelativeLayout>

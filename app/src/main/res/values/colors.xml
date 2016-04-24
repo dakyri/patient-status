@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="itemSelectedBack">#ccf1c6</color>
+    <color name="itemPressedBack">#dedede</color>
+    <color name="textbgBorder">#888888</color>
+    <color name="textbgGradF">#dddddd</color>
+    <color name="textbgGradS">#ffffff</color>
+</resources>
