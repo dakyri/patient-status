@@ -257,7 +257,15 @@ public class PatientQuery {
 	public void seatchPatientMatching(String fnmMatch, String snmMatch, String status) {
 		Log.d("PatientQuery ", "searching for " + (fnmMatch != null ? fnmMatch : "") + ", " + (snmMatch != null ? snmMatch : "") + ", "
 				+ (status != null ? status : ""));
-		getPatientsMatching(new ArrayList<Patient>(), fnmMatch, snmMatch, status);
+		getPatientsMatching(new ArrayList<Patient>(),
+				toRegxString(fnmMatch), toRegxString(snmMatch), toRegxString(status));
+	}
+
+	private String toRegxString(String s) {
+		if (s == null || s.equals("")) {
+			return s;
+		}
+		return s.replace("%", ".*").replace("?", ".");
 	}
 
 
