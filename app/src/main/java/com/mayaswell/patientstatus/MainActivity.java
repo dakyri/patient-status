@@ -187,6 +187,18 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public void onBackPressed() {
+		currentSearchParametersIndex--;
+		if (currentSearchParametersIndex >= 0 && searches.size() > 0) {
+			if (currentSearchParametersIndex >= searches.size()) {
+				currentSearchParametersIndex = searches.size() - 1;
+			}
+			final SearchParameters sp = searches.get(currentSearchParametersIndex);
+			if (sp != null) {
+				Log.d("Main", "Redo previous " + sp.firstname+", "+sp.surname+", "+sp.status);
+				searchPatient(sp.firstname, sp.surname, sp.status);
+				return;
+			}
+		}
 		super.onBackPressed();
 	}
 }
