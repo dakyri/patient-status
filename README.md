@@ -1,1 +1,3 @@
-# patient-status
+# PatientStatus
+
+Demo program.
