@@ -2,6 +2,10 @@ package com.mayaswell.patientstatus;
 
 import android.os.AsyncTask;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,21 +25,35 @@ import java.net.URL;
 public class JSONSlurper  extends AsyncTask<String, Integer, JSONObject> {
 
 	protected String lastErrorMsg = "No error";
+	protected int responseCode;
+	protected String responseBody = null;
+	Response response = null;
+	OkHttpClient okclient = null;
 
 	@Override
 	protected JSONObject  doInBackground(String... urls)
 	{
-		BufferedReader reader = null;
-		String responseString = null;
-		HttpURLConnection httpConnection = null;
+//		BufferedReader reader = null;
+		responseBody = null;
+		response = null;
 
-		lastErrorMsg = null;
+		lastErrorMsg = "No error";
+
+		responseCode = 0;
+
 		if (urls.length < 1) {
 			lastErrorMsg = "No request url passed";
 			return null;
 		}
 		String url = urls[0];
 		try {
+			okclient  = new OkHttpClient();
+			Request okrequest = new Request.Builder().url(url).build();
+			response = okclient.newCall(okrequest).execute();
+			responseBody = response.body().string();
+			responseCode = response.code();
+
+			/*
 			URL httpurl = new URL(url);
 			httpConnection = (HttpURLConnection) httpurl.openConnection();
 
@@ -64,7 +82,8 @@ public class JSONSlurper  extends AsyncTask<String, Integer, JSONObject> {
 				return null;
 			}
 			responseString = buffer.toString();
-			JSONObject jsono = new JSONObject(responseString);
+			*/
+			JSONObject jsono = new JSONObject(responseBody);
 			return jsono;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,6 +101,14 @@ public class JSONSlurper  extends AsyncTask<String, Integer, JSONObject> {
 			lastErrorMsg = msg;
 			return null;
 		} finally {
+			try {
+				if (response != null) {
+					response.body().close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			/*
 			if (httpConnection != null) {
 				httpConnection.disconnect();
 			}
@@ -91,6 +118,7 @@ public class JSONSlurper  extends AsyncTask<String, Integer, JSONObject> {
 				} catch (final IOException e) {
 				}
 			}
+			*/
 		}
 	}
 }

@@ -5,15 +5,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,7 +24,8 @@ import java.util.Collection;
  */
 public class MainActivity extends AppCompatActivity {
 	PatientQuery dbQuery;
-	private ListView patientView;
+//	private ListView patientView;
+	private RecyclerView patientView;
 	private PatientAdapter patientAdapter;
 	Patient selectedPatient;
 	ArrayList<SearchParameters> searches;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private static final int TIME_DELAY = 2000;
 	private static long back_pressed = System.currentTimeMillis();
+	private LinearLayoutManager patientLayoutManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +50,25 @@ public class MainActivity extends AppCompatActivity {
 		String statusURLBase = getResources().getString(R.string.status_url_base);
 
 		patientAdapter = new PatientAdapter(this, R.layout.patient_list_item);
-		patientView = (ListView) findViewById(R.id.patientView);
+		patientView = (RecyclerView) findViewById(R.id.patientView);
+
+		// use this setting to improve performance if you know that changes
+		// in content do not change the layout size of the RecyclerView
+		patientView.setHasFixedSize(true);
+
+		// use a linear layout manager
+		patientLayoutManager = new LinearLayoutManager(this);
+		patientView.setLayoutManager(patientLayoutManager);
+
 		patientView.setAdapter(patientAdapter);
-		patientView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		patientView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//		patientView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+/*		patientView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				selectedPatient = patientAdapter.getItem(position);
 			}
 		});
+*/
 
 		dbQuery = new PatientQuery(patientURLBase, statusURLBase);
 		dbQuery.setListener(new PatientQuery.Listener() {

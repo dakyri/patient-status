@@ -13,7 +13,7 @@
     tools:context="com.mayaswell.patientstatus.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ListView
+    <!--<ListView
         android:id="@+id/patientView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,5 +21,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/patientView"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         />
+
 </RelativeLayout>
