@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 		String patientURLBase = getResources().getString(R.string.patient_url_base);
 		String statusURLBase = getResources().getString(R.string.status_url_base);
 
-		patientAdapter = new PatientAdapter(this, R.layout.patient_list_item);
+		patientAdapter = new PatientAdapter();
 		patientView = (RecyclerView) findViewById(R.id.patientView);
 
 		// use this setting to improve performance if you know that changes
