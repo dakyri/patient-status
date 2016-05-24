@@ -66,6 +66,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
 	public void addAll(Collection<Patient> patients) {
 		dataSet.addAll(patients);
+		notifyDataSetChanged();
 	}
 
 	/**
